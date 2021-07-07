@@ -1,0 +1,50 @@
+#! python
+
+  
+def build(ctx):
+
+    ctx(
+        features="run_r_script",
+        source="additional_preprocessing.r",
+        target=[ctx.path_to(ctx, "OUT_DATA", "obj_vars_job_sat.rds"),
+        ctx.path_to(ctx, "OUT_DATA", "subj_vars_job_sat.rds"),
+        ctx.path_to(ctx, "OUT_DATA", "controls_job_sat.rds"),
+        ctx.path_to(ctx, "OUT_DATA", "job_sat.rds")],
+        deps=[
+        ctx.path_to(ctx, "IN_DATA", "Combined_e180c.dta"),
+        ctx.path_to(ctx, "IN_DATA", "Combined_f180c.dta"),
+        ctx.path_to(ctx, "IN_DATA", "Combined_g180c.dta"),
+        ctx.path_to(ctx, "IN_DATA", "Combined_h180c.dta"),
+        ctx.path_to(ctx, "IN_DATA", "Combined_i180c.dta"),
+        ctx.path_to(ctx, "IN_DATA", "Combined_j180c.dta"),
+        ctx.path_to(ctx, "IN_DATA", "Combined_k180c.dta"),
+        ctx.path_to(ctx, "IN_DATA", "Combined_l180c.dta"),
+        ctx.path_to(ctx, "IN_DATA", "Combined_m180c.dta"),
+        ctx.path_to(ctx, "IN_DATA", "Combined_n180c.dta"),
+        ctx.path_to(ctx, "IN_DATA", "Combined_o180c.dta"),
+        ctx.path_to(ctx, "IN_DATA", "Combined_p180c.dta"),
+        ctx.path_to(ctx, "IN_DATA_MANAGEMENT", "GetRaws.r")],
+        name="additional_preprocessing.r",
+    )
+    ctx(
+        features="run_r_script",
+        source="analysis_job_satisfaction.r",
+        deps=[ctx.path_to(ctx, "OUT_DATA", "subj_vars_job_sat.rds"),
+        ctx.path_to(ctx, "OUT_DATA", "job_sat.rds")],
+        name="analysis_job_satisfaction.r",
+    )
+
+    
+    ctx(
+        features="run_r_script",
+        source="supplementary_plots.r",
+        deps=[ctx.path_to(ctx, "OUT_DATA", "outcomes.rds"),
+        ctx.path_to(ctx, "OUT_DATA", "events_by_time.rds"),
+        ctx.path_to(ctx, "OUT_DATA", "demographics.rds")],
+        name="supplementary_plots.r",
+    )
+
+  
+
+    
+  

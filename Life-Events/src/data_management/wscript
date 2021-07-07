@@ -1,0 +1,33 @@
+#! python
+
+
+def build(ctx):
+
+      ctx(
+        features="run_r_script",
+        source="preprocessing.r",
+        target=[ctx.path_to(ctx, "OUT_DATA", "events_by_time.rds"),
+        ctx.path_to(ctx, "OUT_DATA", "gh9_items.rds"),
+        ctx.path_to(ctx, "OUT_DATA", "outcomes.rds"),
+        ctx.path_to(ctx, "OUT_DATA", "demographics.rds"),
+        ctx.path_to(ctx, "OUT_DATA", "hilda_life_events_new_vars.rds")],
+        deps=[ctx.path_to(ctx, "IN_DATA", "Combined_b180c.dta"),
+        ctx.path_to(ctx, "IN_DATA", "Combined_c180c.dta"),
+        ctx.path_to(ctx, "IN_DATA", "Combined_d180c.dta"),
+        ctx.path_to(ctx, "IN_DATA", "Combined_e180c.dta"),
+        ctx.path_to(ctx, "IN_DATA", "Combined_f180c.dta"),
+        ctx.path_to(ctx, "IN_DATA", "Combined_g180c.dta"),
+        ctx.path_to(ctx, "IN_DATA", "Combined_h180c.dta"),
+        ctx.path_to(ctx, "IN_DATA", "Combined_i180c.dta"),
+        ctx.path_to(ctx, "IN_DATA", "Combined_j180c.dta"),
+        ctx.path_to(ctx, "IN_DATA", "Combined_k180c.dta"),
+        ctx.path_to(ctx, "IN_DATA", "Combined_l180c.dta"),
+        ctx.path_to(ctx, "IN_DATA", "Combined_m180c.dta"),
+        ctx.path_to(ctx, "IN_DATA", "Combined_n180c.dta"),
+        ctx.path_to(ctx, "IN_DATA", "Combined_o180c.dta"),
+        ctx.path_to(ctx, "IN_DATA", "Combined_p180c.dta"),
+        ctx.path_to(ctx, "IN_DATA_MANAGEMENT", "GetRaws.r"),
+        ctx.path_to(ctx, "IN_DATA_MANAGEMENT", "GetMCS.r"),
+        ctx.path_to(ctx, "IN_DATA_MANAGEMENT", "GetEventTimes.r")],
+        name="preprocessing.r",
+    )

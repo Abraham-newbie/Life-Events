@@ -1,0 +1,31 @@
+#! python
+
+
+def build(ctx):
+     
+    ctx(
+        features="run_r_script",
+        source="analysis_unconditional.r",
+        target=[ctx.path_to(ctx, "OUT_DATA", "unconditional_results.csv"),
+        ctx.path_to(ctx, "OUT_DATA", "unconditional_resid.rds"),
+        ctx.path_to(ctx, "OUT_DATA", "unconditional_covar.rds")],
+        deps=[ctx.path_to(ctx, "OUT_DATA", "outcomes.rds"),
+        ctx.path_to(ctx, "OUT_DATA", "events_by_time.rds"),
+        ctx.path_to(ctx, "OUT_DATA", "demographics.rds"),
+        ctx.path_to(ctx, "IN_ANALYSIS", "unconditionalModels.R")],
+        name="analysis_unconditional.r",
+    )
+
+    ctx(
+        features="run_r_script",
+        source="analysis_conditional.r",
+        target=[ctx.path_to(ctx, "OUT_DATA", "conditional_results.csv"),
+        ctx.path_to(ctx, "OUT_DATA", "conditional_covar.rds")],
+        deps=[ctx.path_to(ctx, "OUT_DATA", "outcomes.rds"),
+        ctx.path_to(ctx, "OUT_DATA", "events_by_time.rds"),
+        ctx.path_to(ctx, "OUT_DATA", "demographics.rds"),
+        ctx.path_to(ctx, "IN_ANALYSIS", "conditionalModels.R")],
+        name="analysis_conditional.r",
+    )
+
+

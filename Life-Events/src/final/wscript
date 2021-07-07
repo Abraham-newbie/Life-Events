@@ -1,0 +1,22 @@
+
+def build(ctx):
+     
+    ctx(
+        features="run_r_script",
+        source="unconditional_model_plot.r",
+        target=[ctx.path_to(ctx, "OUT_FIGURES", "unconditional_model_positive_events_plot.png"),
+        ctx.path_to(ctx, "OUT_FIGURES", "unconditional_model_negative_events_plot.png")],
+        deps=[ctx.path_to(ctx, "OUT_DATA", "unconditional_results.csv"),
+        ctx.path_to(ctx, "IN_FINAL", "psth.R")],
+        name="unconditional_model_plot.r",
+    )
+
+    ctx(
+        features="run_r_script",
+        source="conditional_model_plot.r",
+        target=[ctx.path_to(ctx, "OUT_FIGURES", "conditional_model_positive_events_plot.png"),
+        ctx.path_to(ctx, "OUT_FIGURES", "conditional_model_negative_events_plot.png")],
+        deps=[ctx.path_to(ctx, "OUT_DATA", "conditional_results.csv"),
+        ctx.path_to(ctx, "IN_FINAL", "psth.R")],
+        name="conditional_model_plot.r",
+    )
